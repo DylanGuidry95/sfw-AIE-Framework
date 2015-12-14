@@ -198,6 +198,8 @@ namespace sfw
 	// It's up to you to experiment. Ideally you would create an association between inputs
 	// and whatever the gamepadName is.
 
+	void setMouse(bool cursor);
+
 	// Check to see if a given gamepad index is valid.
 	bool		getGamepadPresent(unsigned gamepadIndex);
 

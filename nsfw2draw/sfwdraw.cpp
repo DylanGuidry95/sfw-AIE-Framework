@@ -289,6 +289,19 @@ namespace sfw
 		return glfwGetMouseButton(window, mousekeycode) == GLFW_PRESS;
 	}
 
+	///Function to turn the mouse cursor visible or not depending on the value of the boolean passed in
+	void sfw::setMouse(bool cursor)
+	{
+		if (cursor == true)
+		{
+			glfwSetInputMode(window, GLFW_CURSOR, GLFW_CURSOR_NORMAL);
+		}
+		else
+		{
+			glfwSetInputMode(window, GLFW_CURSOR, GLFW_CURSOR_HIDDEN);
+		}
+	}
+
 	float sfw::getMouseX()
 	{
 		double x;
