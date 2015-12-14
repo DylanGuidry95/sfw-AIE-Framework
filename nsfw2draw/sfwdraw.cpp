@@ -141,6 +141,28 @@ namespace sfw
 			drawLine(x + cos(i)*radius, y + sin(i)*radius, x + cos(i - step)* radius, y + sin(i - step) * radius, tint, transform);
 	}
 
+	void drawAABB(float x, float y, float xMax, float yMax, float xMin, float yMin, unsigned steps, unsigned tint, const float transform[16])
+	{
+		float topLeftX = x + xMin;
+		float topLeftY = y + yMax;
+
+		float topRightX = x + xMax;
+		float topRightY = y + yMax;
+
+		float botRightX = x + xMax;
+		float botRightY = y + yMin;
+
+		float botLeftX = x + xMin;
+		float botLeftY = y + yMin;
+
+		sfw::drawLine(topLeftX, topLeftY, botRightX, botRightY); //topLeft to botRight 
+		sfw::drawLine(topRightX, topRightY, botLeftX, botLeftY); //topRight to botLeft
+		sfw::drawLine(topRightX, topRightY, botRightX, botRightY); //topRight to botRight
+		sfw::drawLine(topLeftX, topLeftY, botLeftX, botLeftY); //topLeft to botLeft
+		sfw::drawLine(topLeftX, topLeftY, topRightX, topRightY); //topLeft to topRight
+		sfw::drawLine(botLeftX, botLeftY, botRightX, botRightY); //botLeft to botRight
+	}
+
 	void drawTexture(unsigned handle, float x, float y, float w, float h, float r, bool centered, unsigned index, unsigned int tint, const float transform[16])
 	{
 		drawTextureMatrix(handle, index, tint, glm::value_ptr(glm::make_mat4(transform) * glm::translate(x, y, 0.f) *glm::rotate(r, 0.f, 0.f, 1.f)* glm::scale(w, h, 0.f) * (centered ? glm::mat4(1) : glm::translate(0.5f, -0.5f, 0.f))));

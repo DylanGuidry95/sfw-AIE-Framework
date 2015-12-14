@@ -149,6 +149,19 @@ namespace sfw
 	// transform	  : a 4x4 transformation matrix, applied as parent transform
 	void drawCircle(float x, float y, float radius, unsigned steps = 12, unsigned tint = 0xffffffff, const float transform[16] = identity);
 
+	//Dylan Guidry
+	//12/14/2015
+	//Draws a rectangle to the screen
+	/*
+		float x: Center position of the rectangle on the x axis
+		float y: Center position of the rectangle on the y axis
+		float xMax: Max size of the rectangle on the x axis
+		float yMax: Max size of the rectangle on the y axis
+		float xMin: Minimum size of the rectangle on the x axis
+		float yMin: Minimum size of the rectangle on the y axis
+	*/
+	void drawAABB(float x, float y, float xMax, float yMax, float xMin, float yMin, unsigned steps = 12, unsigned tint = 0xffffffff, const float transform[16] = identity);
+
 	// used to initialize an openGL rendering context. USE THIS BEFORE ANYTHING ELSE!
 	// width, height	: Dimensions of window.
 	// title			: OS name of the window
@@ -198,6 +211,11 @@ namespace sfw
 	// It's up to you to experiment. Ideally you would create an association between inputs
 	// and whatever the gamepadName is.
 
+	//Dylan Guidry
+	//12/14/2015
+	//Turns the cursor on and off
+	//if cursor is true the mouse will be visble to the user inside the application window
+	//else the cursor will be not be visible to the user inside the application window
 	void setMouse(bool cursor);
 
 	// Check to see if a given gamepad index is valid.
