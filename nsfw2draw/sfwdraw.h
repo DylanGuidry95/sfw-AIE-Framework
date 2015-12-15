@@ -94,6 +94,13 @@ namespace sfw
 		T yPos;
 	};
 
+	template <typename T>
+	Vec2<T> operator*(Vec2<T> a, float b)
+	{
+		Vec2<T> r = { a.xPos * b, a.yPos * b};
+		return r;
+	}
+
 	//Identity transformation matrix, primarily for internal use.
 	const float identity[16] = {1,0,0,0,  0,1,0,0, 0,0,1,0, 0,0,0,1};
 

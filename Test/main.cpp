@@ -1,11 +1,9 @@
 #include "Collision.h"
 
 
-
 void main()
 {
 	sfw::initContext(800,600,"NSFW Draw");
-
 	// load Texture Map
 	unsigned f = sfw::loadTextureMap("../res/tonc_font.png", 6, 16);	// test non-square atlas
 	unsigned d = sfw::loadTextureMap("../res/fontmap.png",16,16);
@@ -20,38 +18,69 @@ void main()
 	int index = 0;
 	int animArray[2] = {1,'a'};
 
-
-
+	std::list<AABB<float>> rectList;
+	std::list<AABB<float>>::iterator it;
+	std::list<AABB<float>> axisList;
 	sfw::setBackgroundColor(BLACK);
 
 
 	float x = 400, y = 300, speed = 200.0f;
-	AABB<float> Rect({ x,y }, { -30,-30 }, { 30,30 });
-	AABB<float> Rect2({ 100,100 }, { -30,-30 }, { 30,30 });
+	AABB<float> Rect("Dylan",{ x,y }, { -30,-30 }, { 30,30 });
+	AABB<float> Rect2("Bob",{ 100,100 }, { -30,-30 }, { 30,30 });
+	AABB<float> Rect3("Ted", { 200,400 }, { -30,-30 }, { 30,30 });
+	AABB<float> Rect4("Fred", { 500,500 }, { -30,-30 }, { 30,30 });
+
+	Circle<float> circle({ x,y }, 15);
+	//Circle<float> circle2({ 100,100 }, 15);
+
+	rectList.push_back(Rect2);
+	rectList.push_back(Rect);
+	rectList.push_back(Rect3);
+	rectList.push_back(Rect4);
+
 	float rot = 0;
 	sfw::setMouse(true);
 	
 
 	while (sfw::stepContext())
 	{
-		sfw::drawAABB(Rect.m_Pos, Rect.Min, Rect.Max);
+//AABB Tests
 		sfw::drawAABB(Rect2.m_Pos, Rect2.Min, Rect2.Max);
-		sfw::drawCircle( Rect.m_Pos.xPos, Rect.m_Pos.yPos, 2);
-		sfw::drawCircle(Rect2.m_Pos.xPos, Rect2.m_Pos.yPos, 2);
+//
+//		Rect.Movement();
+//
+//		if (col::AABBvsAABB(Rect, Rect2) == true)
+//		{
+//			std::cout << "Colliding" << std::endl;
+//		}
+//		else
+//		{
+//			system("cls");
+//		}
+//
 
-		Rect.Movement();
+//Circle Tests
+		circle.Movement();
+//		sfw::drawCircle(circle2.m_Pos.xPos, circle2.m_Pos.yPos, circle2.radius);
+//
+//		if (col::CIRCLEvsCIRCLE(circle, circle2) == true)
+//		{
+//			std::cout << "Colliding" << std::endl;
+//		}
+//		else
+//		{
+//			system("cls");
+//		}
 
-		if (col::AABBvsAABB(Rect, Rect2) == true)
-		{
-			std::cout << "Colliding" << std::endl;
-		}
-		else
-		{
-			system("cls");
-		}
-		
-		//sfw::drawTexture(u, x, y, sfw::getTextureWidth(u) / 2.5, sfw::getTextureHeight(u) / 2.5, rot, true, 0, 0x88ffffff);
-
+//Circle vs AABB test
+		//if (col::AABBvsCIRCLE(Rect2, circle) == true)
+		//{
+		//	std::cout << "Colliding" << std::endl;
+		//}
+		//else
+		//{
+		//	system("cls");
+		//}
 	}
 
 	sfw::termContext();
