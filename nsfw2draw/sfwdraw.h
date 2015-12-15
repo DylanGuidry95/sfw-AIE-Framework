@@ -86,6 +86,14 @@ NOTE: YOU MUST CALL initContext for any of the functions to work!
 
 namespace sfw
 {
+	//Positional values 
+	template <typename T>
+	struct Vec2
+	{
+		T xPos;
+		T yPos;
+	};
+
 	//Identity transformation matrix, primarily for internal use.
 	const float identity[16] = {1,0,0,0,  0,1,0,0, 0,0,1,0, 0,0,0,1};
 
@@ -160,7 +168,17 @@ namespace sfw
 		float xMin: Minimum size of the rectangle on the x axis
 		float yMin: Minimum size of the rectangle on the y axis
 	*/
-	void drawAABB(float x, float y, float xMax, float yMax, float xMin, float yMin, unsigned steps = 12, unsigned tint = 0xffffffff, const float transform[16] = identity);
+	template <typename T>
+	void drawAABB(Vec2<T> pos, Vec2<T> min, Vec2<T> max, unsigned steps = 12, unsigned tint = 0xffffffff, const float transform[16] = identity) 
+	{
+
+		drawLine(max.xPos, max.yPos, min.xPos, min.yPos); //topRight to botLeft
+		drawLine(min.xPos, max.yPos, max.xPos, min.yPos); //topLeft to botRight
+		drawLine(min.xPos, min.yPos, max.xPos, min.yPos); //bot
+		drawLine(min.xPos, max.yPos, max.xPos, max.yPos); //top
+		drawLine(min.xPos, max.yPos, min.xPos, min.yPos); //left
+		drawLine(max.xPos, max.yPos, max.xPos, min.yPos); //right
+	}
 
 	// used to initialize an openGL rendering context. USE THIS BEFORE ANYTHING ELSE!
 	// width, height	: Dimensions of window.

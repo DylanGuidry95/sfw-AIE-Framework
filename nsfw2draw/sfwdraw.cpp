@@ -23,6 +23,9 @@
 #include <glm\glm.hpp>
 #include <glm\ext.hpp>
 
+
+
+
 namespace sfw
 {
 	// opengl handle, atlas rows, atlas cols, width, height, color channels
@@ -139,28 +142,6 @@ namespace sfw
 
 		for (float i = step; i < 2 * PI; i += step)
 			drawLine(x + cos(i)*radius, y + sin(i)*radius, x + cos(i - step)* radius, y + sin(i - step) * radius, tint, transform);
-	}
-
-	void drawAABB(float x, float y, float xMax, float yMax, float xMin, float yMin, unsigned steps, unsigned tint, const float transform[16])
-	{
-		float topLeftX = x + xMin;
-		float topLeftY = y + yMax;
-
-		float topRightX = x + xMax;
-		float topRightY = y + yMax;
-
-		float botRightX = x + xMax;
-		float botRightY = y + yMin;
-
-		float botLeftX = x + xMin;
-		float botLeftY = y + yMin;
-
-		sfw::drawLine(topLeftX, topLeftY, botRightX, botRightY); //topLeft to botRight 
-		sfw::drawLine(topRightX, topRightY, botLeftX, botLeftY); //topRight to botLeft
-		sfw::drawLine(topRightX, topRightY, botRightX, botRightY); //topRight to botRight
-		sfw::drawLine(topLeftX, topLeftY, botLeftX, botLeftY); //topLeft to botLeft
-		sfw::drawLine(topLeftX, topLeftY, topRightX, topRightY); //topLeft to topRight
-		sfw::drawLine(botLeftX, botLeftY, botRightX, botRightY); //botLeft to botRight
 	}
 
 	void drawTexture(unsigned handle, float x, float y, float w, float h, float r, bool centered, unsigned index, unsigned int tint, const float transform[16])

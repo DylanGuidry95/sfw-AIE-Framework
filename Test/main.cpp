@@ -26,37 +26,32 @@ void main()
 
 
 	float x = 400, y = 300, speed = 200.0f;
-	AABB<float> Rect({ x,y }, 100, 50, -100, -50);
-	AABB<float> Rect2({ 100,100 }, 100, 50, -100, -50);
+	AABB<float> Rect({ x,y }, { -30,-30 }, { 30,30 });
+	AABB<float> Rect2({ 100,100 }, { -30,-30 }, { 30,30 });
 	float rot = 0;
 	sfw::setMouse(true);
 	
 
 	while (sfw::stepContext())
 	{
-		sfw::drawAABB(x, y, 100, 50, -100, -50);
-		sfw::drawAABB(100, 100, 100, 50, -100, -50);
-		col::AABBvsAABB(Rect, Rect2);
+		sfw::drawAABB(Rect.m_Pos, Rect.Min, Rect.Max);
+		sfw::drawAABB(Rect2.m_Pos, Rect2.Min, Rect2.Max);
+		sfw::drawCircle( Rect.m_Pos.xPos, Rect.m_Pos.yPos, 2);
+		sfw::drawCircle(Rect2.m_Pos.xPos, Rect2.m_Pos.yPos, 2);
+
+		Rect.Movement();
+
+		if (col::AABBvsAABB(Rect, Rect2) == true)
+		{
+			std::cout << "Colliding" << std::endl;
+		}
+		else
+		{
+			system("cls");
+		}
+		
 		//sfw::drawTexture(u, x, y, sfw::getTextureWidth(u) / 2.5, sfw::getTextureHeight(u) / 2.5, rot, true, 0, 0x88ffffff);
-		if (sfw::getKey('W'))
-		{
-			y += 2;
-		}
 
-		if (sfw::getKey('A'))
-		{
-			x -= 2;
-		}
-
-		if (sfw::getKey('S'))
-		{
-			y -= 2;
-		}
-
-		if (sfw::getKey('D'))
-		{
-			x += 2;
-		}
 	}
 
 	sfw::termContext();

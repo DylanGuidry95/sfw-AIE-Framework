@@ -5,20 +5,15 @@
 namespace col
 {
 	bool AABBvsAABB(AABB<float> a, AABB<float> b)
-	{
-		bool collision;
-		Vec2<float> topRight1 = { a.xMax + a.m_Pos.xPos, a.yMax + a.m_Pos.yPos };
-		Vec2<float> botLeft1 = { a.xMin + a.m_Pos.xPos, a.yMin + a.m_Pos.yPos };
+	{		
+		if (a.Max.xPos < b.Min.xPos || b.Max.xPos < a.Min.xPos)
+			return false; //not colliding in the x
+		if (a.Max.yPos < b.Min.yPos || b.Max.yPos < a.Min.yPos)
+			return false; //not colliding in the y
 
-		Vec2<float> topRight2 = { b.xMax + b.m_Pos.xPos, b.yMax + b.m_Pos.yPos };
-		Vec2<float> botLeft2 = { b.xMin + b.m_Pos.xPos, b.yMin + b.m_Pos.yPos };
-
-		if(topRight1.xPos >= botLeft2.xPos && topRight2.xPos >= botLeft1.xPos && 
-		   topRight1.yPos >= botLeft2.yPos && topRight2.yPos >= botLeft1.yPos)
+		if (a.Max.xPos > b.Min.xPos && b.Max.xPos > a.Min.xPos && a.Max.yPos > b.Min.yPos && b.Max.yPos > a.Min.yPos)
 		{
-			collision = true;
-			std::cout << "Collider" << std::endl;
+			return true;
 		}
-		return collision;
 	}
 }
