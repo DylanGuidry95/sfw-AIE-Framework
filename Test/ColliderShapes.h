@@ -18,11 +18,13 @@ template <typename T>
 class AABB
 {
 private:
+
+
+public:
 	Vec2<T> m_Pos; //Center position of the rectangle
 	float xMin, xMax; //Minimum and Maximum size the rectangle can be on the x Axis
 	float yMin, yMax; //Minimum and Maximum size the rectangle can be on th ey Axis
 
-public:
 	//Default constructor
 	AABB<T>() 
 	{
